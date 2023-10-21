@@ -1,6 +1,6 @@
-import LoginTemplate from "../components/templates/LoginTemplate";
+import {LoginTemplate} from "../components/templates/LoginTemplate";
 
-export function LoginPage() {
+export const LoginPage = () => {
   return (
     <LoginTemplate/>
   )

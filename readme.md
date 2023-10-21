@@ -53,6 +53,7 @@ cd ../..
 pnpm add styled-components  
 pnpm add react-router-dom
 pnpm add react-icons
+pnpm add prop-types
 ```
 
 ## Desarrollo

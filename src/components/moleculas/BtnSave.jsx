@@ -1,12 +1,25 @@
 import styled from "styled-components"
+import PropTypes from 'prop-types'
+import { Icon } from "../atomos/Icon"
 
-styled
-export function BtnSave() {
+
+export const BtnSave = (props) => {
+
     return (
-        <Container>
-            <div>BtnSave</div>
+        <Container type="submit" bgColor={props.bgColor}>
+            <Icon>{props.icon}</Icon>
+            <span className="btn" onClick={props.func}>
+                {props.title}
+            </span>
         </Container>
     )
+}
+
+BtnSave.propTypes = {
+    func: PropTypes.func,
+    title: PropTypes.string,
+    bgColor: PropTypes.string,
+    icon: PropTypes.string
 }
 
 const Container = styled.button`
@@ -14,4 +27,31 @@ const Container = styled.button`
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    border: none;
+    gap: 10px;
+    background-color:initial;
+    .btn {
+        background: ${(props) => props.bgColor};
+        padding: 0.6em 1.3em;
+        font-weight: 900;
+        font-size: 18px;
+        border: 3px solid black;
+        border-radius: 0.5em;
+        box-shadow: 0.1em 0.1em #000;
+        transition: 0.2s;
+        white-space: 1px;
+        color: #000;
+        cursor: pointer;
+        &:hover {
+            transform: translate(-0.05em, -0.05em);
+            box-shadow: 0.15em 0.15em #000;
+        }
+        &:active {
+            transform: translate(0.05em, 0.05em);
+            box-shadow: 0.1em 0.1em #000;
+        }
+    }
 `
+
+
+

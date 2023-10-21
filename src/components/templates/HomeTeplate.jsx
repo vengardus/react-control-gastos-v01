@@ -1,4 +1,4 @@
-export function HomeTeplate() {
+export const HomeTeplate = () => {
   return (
     <div>HomeTeplate</div>
   )

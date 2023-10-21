@@ -1,7 +1,9 @@
 import styled from "styled-components"
 import { BtnSave } from "../moleculas/BtnSave"
+import {v} from "../../styles/variables"
 
-export default function LoginTemplate() {
+
+export const LoginTemplate = () => {
   return (
     <div>
       <span>versión 1.0</span>
@@ -11,7 +13,10 @@ export default function LoginTemplate() {
       <Title>Control de gastos</Title>
       <p>Toma el control de tus gatos e ingresos</p>
       <ContainerButton>
-        <BtnSave/>
+        <BtnSave
+          title={"Iniciar con google"}
+          icon={<v.iconogoogle/>}
+        />
       </ContainerButton>
     </div>
   )

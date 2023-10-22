@@ -11,7 +11,7 @@ export const useAuthStore = create((set) => ({
             })
             if (error) throw new error('Ocurrió un error durante la autenticación.')
             set({ isAuth: true })
-
+            console.log('SignIn-data', data)
             return data
         }
         catch (error) {

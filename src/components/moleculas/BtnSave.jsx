@@ -31,7 +31,7 @@ const Container = styled.button`
     gap: 10px;
     background-color:initial;
     .btn {
-        background: ${(props) => props.bgcolor};
+        background: ${(props) => {const {bgcolor}= props; return bgcolor}};
         padding: 0.6em 1.3em;
         font-weight: 900;
         font-size: 18px;

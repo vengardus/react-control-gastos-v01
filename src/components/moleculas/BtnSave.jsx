@@ -6,7 +6,7 @@ import { Icon } from "../atomos/Icon"
 export const BtnSave = (props) => {
 
     return (
-        <Container type="submit" bgColor={props.bgColor}>
+        <Container type="submit" bgcolor={props.bgcolor}>
             <Icon>{props.icon}</Icon>
             <span className="btn" onClick={props.func}>
                 {props.title}
@@ -17,9 +17,9 @@ export const BtnSave = (props) => {
 
 BtnSave.propTypes = {
     func: PropTypes.func,
-    title: PropTypes.string,
-    bgColor: PropTypes.string,
-    icon: PropTypes.string
+    title: PropTypes.any,
+    bgcolor: PropTypes.any,
+    icon: PropTypes.any,
 }
 
 const Container = styled.button`
@@ -31,7 +31,7 @@ const Container = styled.button`
     gap: 10px;
     background-color:initial;
     .btn {
-        background: ${(props) => props.bgColor};
+        background: ${(props) => props.bgcolor};
         padding: 0.6em 1.3em;
         font-weight: 900;
         font-size: 18px;

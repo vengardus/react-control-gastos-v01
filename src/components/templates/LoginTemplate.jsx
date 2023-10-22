@@ -1,9 +1,11 @@
 import styled from "styled-components"
 import { BtnSave } from "../moleculas/BtnSave"
 import { v } from "../../styles/variables"
+import { useAuthStore } from "../../store/AuthStore"
 
 
 export const LoginTemplate = () => {
+  const { signInWithGoogle } = useAuthStore()
   return (
     <Container>
       <div className="contentCard">
@@ -17,7 +19,8 @@ export const LoginTemplate = () => {
           <BtnSave
             title={"Iniciar con google"}
             icon={<v.iconogoogle />}
-            bgColor={v.colorSecundario}
+            bgcolor={v.colorSecundario}
+            func={signInWithGoogle}
           />
         </ContainerButton>
       </div>

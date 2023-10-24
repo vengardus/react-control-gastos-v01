@@ -8,6 +8,7 @@ export const HomePage = () => {
   return (
     <>
     <div>Bienvenido {user?.user_metadata?.full_name}</div>
+    <div>{user?.user_metadata?.picture}</div>
     <img src={user?.user_metadata?.picture} alt="img" />
     <button onClick={signOut}>Cerrar session</button>
     </>

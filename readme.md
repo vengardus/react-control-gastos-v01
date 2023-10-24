@@ -37,6 +37,7 @@ mkdir store
 mkdir styles
 mkdir supabase
 mkdir utils
+mkdir hooks
 
 cd components
 mkdir atomos

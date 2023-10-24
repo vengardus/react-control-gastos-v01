@@ -9,7 +9,7 @@ import { AuthContextProvider } from './context/AuthContext'
 export const ThemeContext = createContext(null)
 
 function App() {
-  const [theme, setTheme] = useState("light")
+  const [theme, setTheme] = useState("dark")
   const themeStyle = (theme === "light") ? Light : Dark
 
   return (

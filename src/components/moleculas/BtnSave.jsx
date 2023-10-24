@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { Icon } from "../atomos/Icon"
 
 
-export const BtnSave = (props) => {
+export const BtnSave = ({func, title, bgcolor, icon}) => {
 
     return (
-        <Container type="submit" bgcolor={props.bgcolor}>
-            <Icon>{props.icon}</Icon>
-            <span className="btn" onClick={props.func}>
-                {props.title}
+        <Container type="submit" $bgcolor={bgcolor}>
+            <Icon>{icon}</Icon>
+            <span className="btn" onClick={func}>
+                {title}
             </span>
         </Container>
     )
@@ -31,7 +31,7 @@ const Container = styled.button`
     gap: 10px;
     background-color:initial;
     .btn {
-        background: ${(props) => {const {bgcolor}= props; return bgcolor}};
+        background: ${(props)=>props.$bgcolor};
         padding: 0.6em 1.3em;
         font-weight: 900;
         font-size: 18px;

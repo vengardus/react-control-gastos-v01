@@ -17,8 +17,8 @@ export const BtnSave = ({func, title, bgcolor, icon}) => {
 
 BtnSave.propTypes = {
     func: PropTypes.func,
-    title: PropTypes.any,
-    bgcolor: PropTypes.any,
+    title: PropTypes.string,
+    bgcolor: PropTypes.string,
     icon: PropTypes.any,
 }
 

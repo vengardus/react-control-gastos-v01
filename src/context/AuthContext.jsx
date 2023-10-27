@@ -16,8 +16,8 @@ export const AuthContextProvider = (props) => {
                     setUser(null)
                 }
                 else {
-                    console.log('event', event)
-                    console.log('sesion', sesion.user?.id, sesion.user?.email, sesion.user?.user_metadata)
+                    //console.log('event', event)
+                    //console.log('sesion', sesion.user?.id, sesion.user?.email, sesion.user?.user_metadata)
                     setUser(sesion.user)
                 }
             }

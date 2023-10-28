@@ -70,3 +70,28 @@ pnpm add @supabase/supabase-js
 - Crear paginas: pages/LoginPage.jsx
 - Crear templates por cada pagina: components/templates/LoginTemnplate.jsx
 - Crear rutas: routes/routes.jsx
+
+## Supabase
+
+- Tables
+    -- users
+    -- accounts
+
+- Triggers
+
+```plpsql
+create function insert_account() 
+returns trigger
+language plpgsql
+as $$
+begin
+  insert into accounts(id_user) values (new.id);
+  return new;
+end;
+$$;
+
+create trigger account_insert_trigger
+after insert on users
+for each row
+execute function insert_account();
+```

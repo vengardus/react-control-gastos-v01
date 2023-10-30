@@ -57,6 +57,7 @@ pnpm add react-icons
 pnpm add prop-types
 pnpm add zustand
 pnpm add @supabase/supabase-js
+pnpm add iso-country-currency
 ```
 
 ## Desarrollo

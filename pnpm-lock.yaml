@@ -8,6 +8,9 @@ dependencies:
   '@supabase/supabase-js':
     specifier: ^2.38.2
     version: 2.38.2
+  iso-country-currency:
+    specifier: ^0.7.2
+    version: 0.7.2
   prop-types:
     specifier: ^15.8.1
     version: 15.8.1
@@ -1749,6 +1752,10 @@ packages:
   /isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
     dev: true
+
+  /iso-country-currency@0.7.2:
+    resolution: {integrity: sha512-RcFyqdvt1nbPPrUfAs2cuWnjynZYHU671r9MlcH7zn9Zkyif3tR9LJWVJmpFeSMDECDeycDUNiy9Mur+B21Sqw==}
+    dev: false
 
   /iterator.prototype@1.1.2:
     resolution: {integrity: sha512-DR33HMMr8EzwuRL8Y9D3u2BMj8+RqSE850jfGu59kS7tbmPLzGkZmVSfyCFSDxuZiEY6Rzt3T2NA/qU+NwVj1w==}

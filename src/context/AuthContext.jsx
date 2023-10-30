@@ -19,8 +19,8 @@ export const AuthContextProvider = (props) => {
                 else {
                     //console.log('event', event)
                     console.log('sesion', session.user?.id, session.user?.user_metadata)
-                    setUser(session.user)
-                    await _userInsert(session.user.user_metadata, session.user.id)
+                    setUser(session.user.user_metadata)
+                    _userInsert(session.user.user_metadata, session.user.id)
                 }
             }
         )

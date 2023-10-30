@@ -8,31 +8,38 @@ import { AuthContextProvider } from './context/AuthContext'
 import { SideBar } from './components/organismos/sidebar/SideBar'
 import { Device } from './styles/breakpoints'
 import { MenuBurger } from './components/organismos/MenuBurger'
+import { useLocation } from 'react-router-dom'
 
 export const ThemeContext = createContext(null)
 
 function App() {
+  const { pathname } = useLocation()
   const [theme, setTheme] = useState("dark")
   const themeStyle = (theme === "light") ? Light : Dark
   const [sideBarOpen, setSideBarOpen] = useState(false)
 
-  console.log('sideBarOpen', sideBarOpen)
+
   return (
     <>
       <ThemeContext.Provider value={{ setTheme, theme }}>
         <ThemeProvider theme={themeStyle} >
           <AuthContextProvider>
-            <Container className={sideBarOpen? "active":""}>
-              <div className='ContentSideBar'>
-                <SideBar state={sideBarOpen} setState={setSideBarOpen} />
-              </div>
-              <div className='ContentBurger'>
-                <MenuBurger />
-              </div>
-              <ContainerBody>
-                <MyRoutes />
-              </ContainerBody>
-            </Container>
+            {
+              (pathname == '/login')
+                ? <MyRoutes />
+                :
+                <Container className={sideBarOpen ? "active" : ""}>
+                  <div className='ContentSideBar'>
+                    <SideBar state={sideBarOpen} setState={setSideBarOpen} />
+                  </div>
+                  <div className='ContentBurger'>
+                    <MenuBurger />
+                  </div>
+                  <ContainerBody>
+                    <MyRoutes />
+                  </ContainerBody>
+                </Container>
+            }
           </AuthContextProvider>
         </ThemeProvider>
       </ThemeContext.Provider>

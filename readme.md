@@ -58,6 +58,7 @@ pnpm add prop-types
 pnpm add zustand
 pnpm add @supabase/supabase-js
 pnpm add iso-country-currency
+pnpm add @tanstack/react-query
 ```
 
 ## Desarrollo

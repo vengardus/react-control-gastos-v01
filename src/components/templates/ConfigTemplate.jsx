@@ -4,12 +4,19 @@ import { useState } from "react"
 import { Selector } from "../organismos/Selector"
 import { v } from "../../styles/variables"
 import { ListCountry } from "../organismos/ListCountry"
+import { useUserStore } from "../../store/UserStore"
 
 
 export const ConfigTemplate = () => {
     const [state, setState] = useState(false)
     const [stateCountries, setStateCountries] = useState(false)
-    const [select, setSelect] = useState()
+    const [select, setSelect] = useState([])
+    const { dataUser } = useUserStore()
+    console.log('DATAUSER', dataUser)
+    const moneda = select.symbol?? dataUser.currency
+    const pais = select.countryName?? dataUser.country
+    const selectedCountry = `${moneda} ${pais}`
+
     return (
         <Container>
             <header className="header">
@@ -27,7 +34,8 @@ export const ConfigTemplate = () => {
                     <Selector
                         state={stateCountries}
                         color={v.colorselector}
-                        func={()=>setStateCountries(!stateCountries)}
+                        text1={selectedCountry}
+                        func={() => setStateCountries(!stateCountries)}
                     />
                     {
                         stateCountries
@@ -38,7 +46,7 @@ export const ConfigTemplate = () => {
                     }
                 </ContentCard>
             </section>
-            <section className="main"></section>
+            <section className="main">MAIN</section>
         </Container>
     )
 }

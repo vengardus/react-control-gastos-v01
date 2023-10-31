@@ -9,15 +9,40 @@ import { SideBar } from './components/organismos/sidebar/SideBar'
 import { Device } from './styles/breakpoints'
 import { MenuBurger } from './components/organismos/MenuBurger'
 import { useLocation } from 'react-router-dom'
+import {
+  useQuery,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import { useUserStore } from './store/UserStore'
 
 export const ThemeContext = createContext(null)
 
+const queryClient = new QueryClient()
+
 function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Todos />
+    </QueryClientProvider>
+  )
+}
+
+function Todos() {
   const { pathname } = useLocation()
   const [theme, setTheme] = useState("dark")
   const themeStyle = (theme === "light") ? Light : Dark
   const [sideBarOpen, setSideBarOpen] = useState(false)
+  const { userGet } = useUserStore()
 
+  //const queryClient = useQueryClient()
+  const query = useQuery({
+     queryKey:["mostrar usuario"],
+     queryFn: () => userGet()
+   })
+
+  if ( query.isLoading ) return <div>Cargando...</div> 
+  if ( query.isError ) return <h1>Error... </h1>
 
   return (
     <>
@@ -46,6 +71,7 @@ function App() {
     </>
   )
 }
+
 
 const Container = styled.div`
   display: grid;

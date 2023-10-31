@@ -62,7 +62,30 @@ ListCountry.propTypes = {
 
 
 const Container = styled.div`
-
+    margin-top: 15px;
+    position: absolute;
+    top: 88%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: ${({ theme }) => theme.body};
+    border-radius: 10px;
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: inherit;
+        .close {
+            cursor: pointer;
+            font-size: 25px;
+            transition: all 0.2s;
+            &:hover {
+                color: ${()=>v.colorselector};
+                transform: scale(1.2);
+            }
+        }
+    }
+    
 `
 const ItemContainer = styled.section`
     gap: 10px;

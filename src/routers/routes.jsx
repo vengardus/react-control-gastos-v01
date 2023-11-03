@@ -4,6 +4,7 @@ import { HomePage } from "../pages/HomePage"
 import { ProtectedRoutes } from "../hooks/ProtectedRoutes"
 import { UserAuth } from "../context/AuthContext"
 import { ConfigPage } from "../pages/ConfigPage"
+import { CategoryPage } from "../pages/CategoryPage"
 
 export function MyRoutes() {
     const { user } = UserAuth()
@@ -18,6 +19,7 @@ export function MyRoutes() {
             >
                 <Route path="/" element={<HomePage />} />
                 <Route path="/config" element={<ConfigPage />} />
+                <Route path="/category" element={<CategoryPage />} />
             </Route>
         </Routes>
 

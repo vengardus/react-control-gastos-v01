@@ -4,7 +4,6 @@ import { ItemMenuDesplegable } from "./ItemMenuDesplegable"
 import { v } from "../../styles/variables"
 
 export const ListMenuDesplegable = ({ data, top, func }) => {
-    
     return (
         <Container $top={top}>
             {
@@ -12,7 +11,7 @@ export const ListMenuDesplegable = ({ data, top, func }) => {
                     <ItemMenuDesplegable
                         key={index}
                         item={item}
-                        func={() => func(item.tipo)}
+                        func={() => func(item)}
                     />
                 ))
             }

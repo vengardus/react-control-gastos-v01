@@ -98,3 +98,15 @@ after insert on users
 for each row
 execute function insert_account();
 ```
+
+## Ayuda memoria
+
+### Deshabilitar propTypes del lint en vsCode
+
+```json
+# disable project-wide in your eslintrc:
+
+"rules": {
+  "react/prop-types": "off"
+}
+```

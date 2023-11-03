@@ -1,15 +1,20 @@
 import styled from "styled-components"
 import PropTypes from "prop-types"
 import { Icon } from "../atomos/Icon"
+import { ContentColor } from "../atomos/ContentColor"
 
 export const ItemMenuDesplegable = ({item, func}) => {
     return (
         <Container onClick={func}>
-            <Icon>{<item.icono />}</Icon>
+            { item.icono && <Icon>{<item.icono />}</Icon>}
+            <ContentColor $alto="12px" $ancho="12px" $color={item.color}/>
             <span>{item.text}</span>
         </Container>
     )
 }
+
+
+// SECTIN 6- 53-47 - min:7
 
 ItemMenuDesplegable.propTypes = {
     item:PropTypes.any,

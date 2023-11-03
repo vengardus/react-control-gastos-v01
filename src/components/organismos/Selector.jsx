@@ -10,6 +10,7 @@ export const Selector = ({
     text1,
     text2
 }) => {
+    console.log('state', state)
     return (
         <Container color={color} onClick={func}> 
             <div>

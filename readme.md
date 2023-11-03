@@ -59,6 +59,7 @@ pnpm add zustand
 pnpm add @supabase/supabase-js
 pnpm add iso-country-currency
 pnpm add @tanstack/react-query
+pnpm add sweetalert2
 ```
 
 ## Desarrollo

@@ -11,51 +11,44 @@ import { MenuBurger } from './components/organismos/MenuBurger'
 import { useLocation } from 'react-router-dom'
 import {
   useQuery,
-  QueryClient,
-  QueryClientProvider,
 } from '@tanstack/react-query'
 import { useUserStore } from './store/UserStore'
+import { LoginPage } from './pages/LoginPage'
+
 
 export const ThemeContext = createContext(null)
 
-const queryClient = new QueryClient()
-
 function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Todos />
-    </QueryClientProvider>
-  )
-}
-
-function Todos() {
+  const { userGet, dataUser } = useUserStore()
   const { pathname } = useLocation()
-  const [theme, setTheme] = useState("dark")
+  //const [theme, setTheme] = useState(dataUser.theme)
+  const theme = (dataUser?.theme === "0") ? "light" : "dark"
   const themeStyle = (theme === "light") ? Light : Dark
   const [sideBarOpen, setSideBarOpen] = useState(false)
-  const { userGet } = useUserStore()
 
-  //const queryClient = useQueryClient()
   const query = useQuery({
-     queryKey:["mostrar usuario"],
-     queryFn: () => userGet()
-   })
+    queryKey: ["mostrar usuario"],
+    queryFn: () => userGet()
+  })
 
-  if ( query.isLoading ) return <div>Cargando...</div> 
-  if ( query.isError ) return <h1>Error... </h1>
+  if (query.isLoading) return <div>Cargando...</div>
+  if (query.isError) return <h1>Error... </h1>
 
   return (
     <>
-      <ThemeContext.Provider value={{ setTheme, theme }}>
+      <ThemeContext.Provider value={{ theme }}>
         <ThemeProvider theme={themeStyle} >
           <AuthContextProvider>
             {
-              (pathname == '/login')
-                ? <MyRoutes />
+              (pathname === '/login')
+                ? <LoginPage />
                 :
                 <Container className={sideBarOpen ? "active" : ""}>
                   <div className='ContentSideBar'>
-                    <SideBar state={sideBarOpen} setState={setSideBarOpen} />
+                    <SideBar
+                      state={sideBarOpen}
+                      setState={setSideBarOpen}
+                    />
                   </div>
                   <div className='ContentBurger'>
                     <MenuBurger />

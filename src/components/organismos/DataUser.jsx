@@ -16,7 +16,6 @@ export const DataUser = ({ stateConfig }) => {
             await signOut();
         }
     };
-    //console.log('User', user)
 
     return (
         <Container onClick={stateConfig.setState}>

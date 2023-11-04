@@ -5,7 +5,9 @@ import { DataUser } from "./DataUser"
 export const Header = ({ stateConfig }) => {
     return (
         <ContentHeader>
-            <DataUser stateConfig={stateConfig} />
+            <div onClick={(e) => e.stopPropagation()}>
+                <DataUser stateConfig={stateConfig} />
+            </div>
         </ContentHeader>
     )
 }

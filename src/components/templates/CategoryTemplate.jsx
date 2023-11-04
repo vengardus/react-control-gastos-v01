@@ -10,35 +10,64 @@ import { DataDesplegableTipo } from "../../utils/dataEstatica"
 
 export const CategoryTemplate = () => {
     const [state, setState] = useState(false)
+    const [stateType, setTypeState] = useState(false)
     const { titleBtnDropDown, colorCategory, bgCategory, setType } = useOperations()
 
     const changeType = (p) => {
         setType(p)
+        setTypeState(!stateType)
+    }
+
+    const openUser = () => {
+        setState(!state);
+        setTypeState(false);
+    }
+
+    const openType = () => {
+        setTypeState(!stateType);
+        setState(false);
+    }
+
+    const closeDropDowns = () => {
+        setState(false)
+        setTypeState(false)
     }
 
     return (
-        <Container>
+        <Container onClick={closeDropDowns}>
             <header className="header">
                 <Header stateConfig={{
                     state: state,
-                    setState: () => setState(!state)
+                    setState: openUser
                 }} />
             </header>
             <section className="areaType">
                 <ContentFilter>
-                    <BtnDropDown
-                        bgColor={bgCategory}
-                        textColor={colorCategory}
-                        text={titleBtnDropDown}
-                    />
-                    <ListMenuDesplegable
-                        data={DataDesplegableTipo}
-                        top={"112%"}
-                        func={(p) => changeType(p)}
-                    />
+                    <div
+                        onClick={(e) => {
+                            e.stopPropagation();
+                        }}
+                    >
+                        <BtnDropDown
+                            bgColor={bgCategory}
+                            textColor={colorCategory}
+                            text={titleBtnDropDown}
+                            func={openType}
+                        />
+                        {
+                            stateType
+                            && <ListMenuDesplegable
+                                data={DataDesplegableTipo}
+                                top={"112%"}
+                                func={(p) => changeType(p)}
+                            />
+                        }
+                    </div>
                 </ContentFilter>
             </section>
-            <section className="area2"></section>
+            <section className="area2">
+                <ContentFilter></ContentFilter>
+            </section>
             <section className="main"></section>
         </Container>
     )
@@ -79,4 +108,11 @@ const Container = styled.div`
         grid-area: main;
         background-color: rgba(179, 46, 241, 0.14);
     }
+`
+
+const ContentFilter = styled.div`
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 `

@@ -24,6 +24,10 @@ import { AiOutlineCalculator } from "react-icons/ai";
 import { BsCalendarCheck } from "react-icons/bs";
 import {IoIosArrowForward} from "react-icons/io";
 import fondo from "../assets/fondo1.svg";
+import {GrFormPrevious,GrCaretNext} from "react-icons/gr"
+import {MdOutlineBorderAll} from "react-icons/md"
+
+
 export const v = {
   sidebarWidth: `300px`,
   sidebarWidthInitial: `10vw`,
@@ -82,4 +86,7 @@ export const v = {
   iconoflechaderecha:IoIosArrowForward,
   colorselector:"#BF94FF",
   rgbafondos:"rgba(210, 110, 249, 0.1)",
+  iconoprev:GrFormPrevious,
+  icononext:GrCaretNext,
+  iconotodos:MdOutlineBorderAll
 };

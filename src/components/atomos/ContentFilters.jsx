@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 
-export const ContentFilter = styled.div`
+export const ContentFilters = styled.div`
     position: relative;
     display: flex;
     justify-content: space-between;

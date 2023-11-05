@@ -8,6 +8,17 @@ import { MdOutlineAnalytics } from "react-icons/md";
 import {RiDashboard3Line} from "react-icons/ri"
 import {TbPig} from "react-icons/tb"
 
+export const APP_CONFIG = {
+  movementType : {
+    ingreso : 'I',
+    gasto: 'G'
+  },
+  actionCrud: {
+    update: "update",
+    insert: "insert"
+  }
+}
+
 export const DesplegableUser = [
   {
     text: "Mi perfil",
@@ -30,13 +41,13 @@ export const DataDesplegableTipo = [
   {
     text: "Categorias gastos",
     color: v.colorGastos,
-    tipo: "g",
+    tipo: APP_CONFIG.movementType.gasto,
     bgColor: v.colorbgGastos
   },
   {
     text: "Categorias ingresos",
     color: v.colorIngresos,
-    tipo: "i",
+    tipo: APP_CONFIG.movementType.ingreso,
     bgColor: v.colorbgingresos
   },
 ];
@@ -94,3 +105,4 @@ export const TemasData = [
     
   },
 ];
+

@@ -1,16 +1,21 @@
 import styled from "styled-components"
 import { Header } from "../organismos/Header"
 import { useState } from "react"
-import { ContentFilter } from "../atomos/ContentFilter"
+import { ContentFilters } from "../atomos/ContentFilters"
 import { BtnDropDown } from "../moleculas/BtnDropDown"
 import { useOperations } from "../../store/OperationsStore"
 import { ListMenuDesplegable } from "../moleculas/ListMenuDesplegable"
 import { DataDesplegableTipo } from "../../utils/dataEstatica"
+import { Btnfilter } from "../organismos/BtnFilter"
+import { v } from "../../styles/variables"
+import { TablaCategorias } from "../organismos/tablas/TablaCategorias"
+import { RegistrarCategorias } from "../organismos/formularios/RegistrarCategorias"
 
 
-export const CategoryTemplate = () => {
+export const CategoryTemplate = ({ data }) => {
     const [state, setState] = useState(false)
     const [stateType, setTypeState] = useState(false)
+    const [dataSelect, setDataSelect] =  useState([])
     const { titleBtnDropDown, colorCategory, bgCategory, setType } = useOperations()
 
     const changeType = (p) => {
@@ -35,6 +40,11 @@ export const CategoryTemplate = () => {
 
     return (
         <Container onClick={closeDropDowns}>
+
+            <RegistrarCategorias 
+                dataSelect={dataSelect}
+            />
+
             <header className="header">
                 <Header stateConfig={{
                     state: state,
@@ -42,7 +52,7 @@ export const CategoryTemplate = () => {
                 }} />
             </header>
             <section className="areaType">
-                <ContentFilter>
+                <ContentFilters>
                     <div
                         onClick={(e) => {
                             e.stopPropagation();
@@ -63,12 +73,20 @@ export const CategoryTemplate = () => {
                             />
                         }
                     </div>
-                </ContentFilter>
+                </ContentFilters>
             </section>
             <section className="area2">
-                <ContentFilter></ContentFilter>
+                <ContentFilter>
+                    <Btnfilter
+                        bgColor={bgCategory}
+                        textColor={colorCategory}
+                        icon={<v.agregar />}
+                    />
+                </ContentFilter>
             </section>
-            <section className="main"></section>
+            <section className="main">
+                <TablaCategorias data={data} />
+            </section>
         </Container>
     )
 }
@@ -103,6 +121,8 @@ const Container = styled.div`
         background-color: rgba(77, 237, 106, 0.14);
         display: flex;
         align-items: center;
+        justify-content: end;
+        padding-right: 0.7rem;
     }
     .main {
         grid-area: main;

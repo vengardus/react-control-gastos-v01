@@ -60,6 +60,10 @@ pnpm add @supabase/supabase-js
 pnpm add iso-country-currency
 pnpm add @tanstack/react-query
 pnpm add sweetalert2
+pnpm add react-hook-form
+pnpm add react-color
+pnpm add emoji-picker-react
+pnpm add react-spinners
 ```
 
 ## Desarrollo

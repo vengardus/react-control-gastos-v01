@@ -5,7 +5,7 @@ import { ContentFilters } from "../atomos/ContentFilters"
 import { BtnDropDown } from "../moleculas/BtnDropDown"
 import { useOperations } from "../../store/OperationsStore"
 import { ListMenuDesplegable } from "../moleculas/ListMenuDesplegable"
-import { DataDesplegableTipo } from "../../utils/dataEstatica"
+import { APP_CONFIG, DataDesplegableTipo } from "../../utils/dataEstatica"
 import { Btnfilter } from "../organismos/BtnFilter"
 import { v } from "../../styles/variables"
 import { TablaCategorias } from "../organismos/tablas/TablaCategorias"
@@ -15,12 +15,16 @@ import { RegistrarCategorias } from "../organismos/formularios/RegistrarCategori
 export const CategoryTemplate = ({ data }) => {
     const [state, setState] = useState(false)
     const [stateType, setTypeState] = useState(false)
-    const [dataSelect, setDataSelect] =  useState([])
+    const [dataSelect, setDataSelect] = useState([])
     const { titleBtnDropDown, colorCategory, bgCategory, setType } = useOperations()
+    const [openRegistro, setOpenRegistro] = useState(false)
+    const [action, setAction] = useState()
 
     const changeType = (p) => {
+        console.log('P', p)
         setType(p)
         setTypeState(!stateType)
+        setState(false)
     }
 
     const openUser = () => {
@@ -38,12 +42,22 @@ export const CategoryTemplate = ({ data }) => {
         setTypeState(false)
     }
 
+    const nuevoRegistro = () => {
+        setOpenRegistro(!openRegistro)
+        setAction(APP_CONFIG.actionCrud.insert)
+        setDataSelect([])
+    }
+
     return (
         <Container onClick={closeDropDowns}>
-
-            <RegistrarCategorias 
-                dataSelect={dataSelect}
-            />
+            {
+                openRegistro
+                && <RegistrarCategorias
+                    dataSelect={dataSelect}
+                    onClose={() => setOpenRegistro(!openRegistro)}
+                    accion={action}
+                />
+            }
 
             <header className="header">
                 <Header stateConfig={{
@@ -81,11 +95,18 @@ export const CategoryTemplate = ({ data }) => {
                         bgColor={bgCategory}
                         textColor={colorCategory}
                         icon={<v.agregar />}
+                        func={nuevoRegistro}
                     />
                 </ContentFilter>
+
             </section>
             <section className="main">
-                <TablaCategorias data={data} />
+                <TablaCategorias 
+                    data={data} 
+                    setdataSelect={setDataSelect}
+                    setAccion={setAction}
+                    SetopenRegistro={setOpenRegistro}
+                />
             </section>
         </Container>
     )

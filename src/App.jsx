@@ -14,6 +14,7 @@ import {
 } from '@tanstack/react-query'
 import { useUserStore } from './store/UserStore'
 import { LoginPage } from './pages/LoginPage'
+import { SpinnerLoader } from './components/moleculas/SpinnerLoader'
 
 
 export const ThemeContext = createContext(null)
@@ -31,7 +32,7 @@ function App() {
     queryFn: () => userGet()
   })
 
-  if (query.isLoading) return <div>Cargando...</div>
+  if (query.isLoading ) return <SpinnerLoader />
   if (query.isError) return <h1>Error... </h1>
 
   return (

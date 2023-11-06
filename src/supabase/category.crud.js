@@ -33,6 +33,7 @@ export const categoryInsert = async (p) => {
 
 export const categoryGet = async (p) => {
   try {
+    console.log('crud-get', p)
     const {data}  = await supabase
       .from(TABLE_NAME)
       .select()
@@ -74,3 +75,26 @@ export const categoryUpdate = async(p) => {
     alert(error.error_description || error.message + " editar categorias");
   }
 }
+
+export const categoryDeleteAll = async (p) => {
+  try {
+    const { error } = await supabase
+      .from(TABLE_NAME)
+      .delete()
+      .eq("id_user", p.id_user)
+    if (error) {
+      alert("Error al eliminar", error);
+    }
+    else {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Registros eliminados",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+    }
+  } catch (error) {
+    alert(error.error_description || error.message + " eliminar categorias");
+  }
+};

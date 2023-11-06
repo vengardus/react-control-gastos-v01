@@ -18,12 +18,13 @@ export const userGet = async () => {
     const { data } = await supabase
       .from("users")
       .select()
-      .eq("idauth_supabase", idAUthSupabase);
+      .eq("idauth_supabase", idAUthSupabase)
+      .maybeSingle();
     // if (error) {
     //   alert("useGet", error);
     //   return null;
     // }
-    return data ? data[0] : null;
+    return data;
   } catch (error) {
     // alert(error.error_description || error.message + "userGet");
     // return null;

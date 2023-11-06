@@ -3,7 +3,8 @@ import {
     categoryGet, 
     categoryUpdate, 
     categoryInsert, 
-    categoryDelete 
+    categoryDelete, 
+    categoryDeleteAll
 } from "../supabase/category.crud";
 
 
@@ -12,6 +13,7 @@ export const useCategoryStore = create((set, get) => ({
     categoryGet: async (p) => {
         const data = await categoryGet(p)
         set({ dataCategory: data?? [] })
+        console.log('categoryGet', data)
         return data?? []
     },
 
@@ -29,6 +31,12 @@ export const useCategoryStore = create((set, get) => ({
 
     categoryDelete: async(p) => {
         await categoryDelete(p)
+        const {categoryGet} = get()
+        set(categoryGet)
+    },
+
+    categoryDeleteAll: async(p) => {
+        await categoryDeleteAll(p)
         const {categoryGet} = get()
         set(categoryGet)
     },

@@ -3,27 +3,28 @@ import { CategoryTemplate } from "../components/templates/CategoryTemplate"
 import { useCategoryStore } from "../store/CategoryStore"
 import { useUserStore } from "../store/UserStore"
 import { useQuery } from "@tanstack/react-query"
-import { APP_CONFIG } from "../utils/dataEstatica"
+import { useOperations } from "../store/OperationsStore"
 
 export const CategoryPage = () => {
     const { dataUser } = useUserStore()
     const { dataCategory, categoryGet } = useCategoryStore()
-    const { isLoading, error } = useQuery({
-        queryKey: ["Show Categories"],
+    const  type  = useOperations(state => state.type)
+    // const [stateType, setStateType] = useState(type)
+    useQuery({
+        queryKey: ["Show Categories", type],
         queryFn: () => categoryGet({
             id_user: dataUser.id,
-            type: APP_CONFIG.movementType.ingreso
+            type: type
         })
     })
 
-    console.log('Categories', dataCategory)
-    if (isLoading) return <h1>cargando....</h1>
-    if (error) return <h1>ocurrió un error</h1>
+    // if (isLoading) return <SpinnerLoader />
+    // if (error) return <h1>ocurrió un error</h1>
 
 
     return (
         <Container>
-            <CategoryTemplate data={dataCategory}/>
+            <CategoryTemplate data={dataCategory} />
         </Container>
     )
 }

@@ -18,7 +18,7 @@ export const AuthContextProvider = (props) => {
                 }
                 else {
                     //console.log('event', event)
-                    console.log('sesion', session.user?.id, session.user?.user_metadata)
+                    //console.log('sesion', session.user?.id, session.user?.user_metadata)
                     setUser(session.user.user_metadata)
                     _userInsert(session.user.user_metadata, session.user.id)
                 }
@@ -35,8 +35,8 @@ export const AuthContextProvider = (props) => {
             photo: dataProvider.picture,
             idauth_supabase: idAuthSupabase
         }
-        const data = await userInsert(p)
-        console.log('Insert', data)
+        await userInsert(p)
+        //console.log('Insert', data)
     }
 
     return <AuthContext.Provider value={{ user }}>

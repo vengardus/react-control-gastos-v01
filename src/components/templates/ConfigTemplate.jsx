@@ -8,6 +8,7 @@ import { useUserStore } from "../../store/UserStore"
 import { ListGeneric } from "../moleculas/ListGeneric"
 import { TemasData } from "../../utils/dataEstatica"
 import { BtnSave } from "../moleculas/BtnSave"
+import { CardEliminarData } from "../organismos/tablas/CardEliminarData"
 
 
 export const ConfigTemplate = () => {
@@ -94,6 +95,8 @@ export const ConfigTemplate = () => {
                     icon={<v.iconoguardar />}
                     func={update}
                 />
+
+                <CardEliminarData />
             </section>
             {/* <section className="main"></section> */}
         </Container>
@@ -137,7 +140,7 @@ const Container = styled.div`
         flex-direction: column;
         justify-content: start;
         gap: 30px;
-        align-self: center;
+        /* align-self: center; */
     }
     /* .main {
         grid-area: main;

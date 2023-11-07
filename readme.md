@@ -64,6 +64,7 @@ pnpm add react-hook-form
 pnpm add react-color
 pnpm add emoji-picker-react
 pnpm add react-spinners
+pnpm add dayjs
 ```
 
 ## Desarrollo

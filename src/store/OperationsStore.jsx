@@ -8,6 +8,14 @@ export const useOperations = create((set, get) => ({
     colorCategory: v.colorIngresos,
     bgCategory: v.colorbgingresos,
     type: APP_CONFIG.movementType.ingreso,
+    year: null,
+    month: null,
+    setYear: (p) => {
+        set({ year: p })
+    },
+    setMonth: (p) => {
+        set({ month: p })
+    },
     setType: (p) => {
         set({
             type: p.tipo,
@@ -15,7 +23,7 @@ export const useOperations = create((set, get) => ({
             colorCategory: p.color,
             bgCategory: p.bgColor,
         })
-        const {type} = get()
+        const { type } = get()
         console.log('settype', type)
     }
 }))

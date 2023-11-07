@@ -67,7 +67,7 @@ export const LinksArray = [
   {
     label: "Movimientos",
     icon: AiOutlineApartment,
-    to: "/movimientos",
+    to: "/movement",
   },
   {
     label: "Informes",

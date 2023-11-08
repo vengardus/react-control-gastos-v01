@@ -104,6 +104,21 @@ for each row
 execute function insert_account();
 ```
 
+- functions (rpc)
+
+```sql
+create function getmovementsbymonthyear(year int, month int, id_user int, type_category varchar)
+returns table()
+language sql
+as $$
+select movements.id, movements.description, movements.value, movements.date, accounts.description as "cuenta", categories.description as "categoria" from movements
+  inner join accounts on accounts.id = movements.id_account
+  inner join users on users.id = accounts.id_user
+  inner join categories on categories.id = movements.id_category
+  where categories.type = type_category and date_part('year', movements.date)=year and date_part('month', movements.date)=month
+$$;
+```
+
 ## Ayuda memoria
 
 ### Deshabilitar propTypes del lint en vsCode

@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import PropTypes from "prop-types"
 
 export const BtnCircular = ({
     icon,
@@ -24,17 +23,6 @@ export const BtnCircular = ({
             <span>{icon}</span>
         </Container>
     )
-}
-
-BtnCircular.propTypes = {
-    icon: PropTypes.any,
-    width: PropTypes.string,
-    height: PropTypes.string,
-    bgColor: PropTypes.string,
-    textColor: PropTypes.string,
-    fontSize: PropTypes.string,
-    translateX: PropTypes.any,
-    translateY: PropTypes.any
 }
 
 const Container = styled.div`

@@ -3,12 +3,45 @@ import { Header } from "../organismos/Header"
 import { useState } from "react"
 import dayjs from "dayjs"
 import { CalendarioLineal } from "../organismos/tablas/CalendarioLineal"
+import { CardTotales } from "../organismos/CardTotales"
+import { useOperations } from "../../store/OperationsStore"
+import { APP_CONFIG } from "../../utils/dataEstatica"
+import { v } from "../../styles/variables"
+import { useMovementStore } from "../../store/MovementStore"
+import { useQuery } from "@tanstack/react-query"
+import { useUserStore } from "../../store/UserStore"
 
 
 export const MovementTemplate = () => {
     const [state, setState] = useState(false)
     const [value, setValue] = useState(dayjs(Date.now()))
     const [formatoFecha, setFormatoFecha] = useState("")
+    const {
+        type,
+        setType,
+        colorCategory,
+        year,
+        month
+    } = useOperations()
+    const {
+        dataMovement,
+        totalMonthYear,
+        totalMonthYearPagados,
+        totalMonthYearPendientes,
+        getMovements
+    } = useMovementStore()
+    const { dataUser } = useUserStore()
+
+    useQuery({
+        queryKey: ['Mostrar movimientos month year'],
+        queryFn: () => getMovements({
+            mont: month,
+            year: year,
+            id_user: dataUser.id,
+            type_category: type
+        })
+    })
+
     return (
         <Container>
             <header className="header">
@@ -17,9 +50,29 @@ export const MovementTemplate = () => {
                     setState: () => setState(!state)
                 }} />
             </header>
-            <section className="area1"></section>
+            <section className="totales">
+                <CardTotales
+                    title={(type === APP_CONFIG.movementType.gasto)
+                        ? "Gastos pendientes"
+                        : "Ingresos pendientes"}
+                    color={colorCategory}
+                    icon={<v.flechaarribalarga />}
+                />
+                <CardTotales
+                    title={(type === APP_CONFIG.movementType.gasto)
+                        ? "Gastos pagados"
+                        : "Ingresos pagados"}
+                    color={colorCategory}
+                    icon={<v.flechaabajolarga />}
+                />
+                <CardTotales
+                    title={"Total"}
+                    color={colorCategory}
+                    icon={<v.balance />}
+                />
+            </section>
             <section className="calendario">
-                <CalendarioLineal 
+                <CalendarioLineal
                     value={value}
                     setValue={setValue}
                     setFormatoFecha={setFormatoFecha}
@@ -39,7 +92,7 @@ const Container = styled.div`
     display: grid;
     grid-template:
         "header" 100px
-        "area1" 100px
+        "totales" 100px
         "calendario" 50px
         "main" auto;
 
@@ -49,8 +102,8 @@ const Container = styled.div`
         display: flex;
         align-items: center;
     }
-    .area1 {
-        grid-area: area1;
+    .totales {
+        grid-area: totales;
         background-color: rgba(229, 67, 26, 0.14);
         display: flex;
         align-items: center;

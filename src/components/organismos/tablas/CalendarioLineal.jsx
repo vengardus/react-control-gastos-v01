@@ -68,7 +68,7 @@ export function CalendarioLineal({
     IniciarCalendario();
   }, []);
   return (
-    <Container className="wrapper" colortext={colorCategory}>
+    <Container className="wrapper" $colortext={colorCategory}>
       <header>
        
         <div className="subcontainer">
@@ -103,12 +103,12 @@ const Container = styled.div`
     .subcontainer {
      
       display: flex;
-      color: ${(props) => props.colortext};
+      color: ${(props) => props.$colortext};
       align-items: center;
       justify-content: center;
      
       .contentValue {
-        border: 2px solid ${(props) => props.colortext};
+        border: 2px solid ${(props) => props.$colortext};
         border-radius: 30px;
         text-align: center;
         display: flex;

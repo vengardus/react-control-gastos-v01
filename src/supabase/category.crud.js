@@ -33,7 +33,6 @@ export const categoryInsert = async (p) => {
 
 export const categoryGet = async (p) => {
   try {
-    console.log('crud-get', p)
     const {data}  = await supabase
       .from(TABLE_NAME)
       .select()

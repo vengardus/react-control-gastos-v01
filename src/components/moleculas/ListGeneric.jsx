@@ -4,15 +4,16 @@ import { Device } from "../../styles/breakpoints"
 import { BtnClose } from "../atomos/BtnClose"
 
 
-export const ListGeneric = ({ data, setState, func }) => {
+export const ListGeneric = ({ data, setState, func, bottom, scroll }) => {
     const selectItem = (p) => {
         console.log('item', p)
         func(p)
         setState()
     }
-    
+    console.log('lisytGeneric.data', data)
+
     return (
-        <Container>
+        <Container $bottom={bottom} $scroll={scroll}>
             <section className="ContentClose">
                 <BtnClose func={setState} />
             </section>
@@ -21,8 +22,8 @@ export const ListGeneric = ({ data, setState, func }) => {
                     data.map((item, index) => {
                         return (
                             <ItemContainer key={index} onClick={() => selectItem(item)}>
-                                <span>{item.icono}</span>
-                                <span>{item.descripcion}</span>
+                                <span>{item.icon}</span>
+                                <span>{item.description}</span>
                             </ItemContainer>
                         )
                     })
@@ -45,15 +46,24 @@ const Container = styled.div`
     color: ${({ theme }) => theme.text};
     position: absolute;
     margin-bottom: 15px;
-    bottom: 88%;
+    bottom: ${(props) => props.$bottom};
     width: 100%;
     padding: 10px;
     border-radius: 10px;
     gap: 10px;
     z-index:3;
+    /* background-color: orange; */
+    flex-wrap: wrap;
     @media ${() => Device.tablet} {
         width: 400px;
     }        
+    .ContentItems {
+        /* overflow-y: ${(props) => props.$scroll}; */
+        position: relative;
+        overflow: auto;
+        scrollbar-color: yellow;
+        scrollbar-width: 40px;
+    }
 `
 
 const ItemContainer = styled.div`

@@ -88,7 +88,7 @@ export function CalendarioLineal({
   );
 }
 const Container = styled.div`
-  width: 450px;
+  width: 100%;
   border-radius: 10px;
   height: 100%;
   display: flex;

@@ -30,6 +30,8 @@ export const CardTotales = ({
                         fontSize={"25px"}
                         icon={icon}
                         textColor={"white"}
+                        translateX={"120px"}
+                        translateY={"-15px"}
                     />
                 </section>
 

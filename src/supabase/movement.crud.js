@@ -1,14 +1,11 @@
 import Swal from "sweetalert2";
 import { supabase } from "./supabase.config";
 
-const TABLE_NAME = 'movements'
+const TABLE_NAME = "movements";
 
 export const movementInsert = async (p) => {
   try {
-    const { data, error } = await supabase
-      .from(TABLE_NAME)
-      .insert(p)
-      .select();
+    const { data, error } = await supabase.from(TABLE_NAME).insert(p).select();
     if (error) {
       Swal.fire({
         icon: "error",
@@ -33,12 +30,12 @@ export const movementInsert = async (p) => {
 
 export const movementGet = async (p) => {
   try {
-    console.log('crud-get', p)
-    const {data}  = await supabase
+    console.log("crud-get", p);
+    const { data } = await supabase
       .from(TABLE_NAME)
       .select()
-      .eq("id_user", p.id_user?? 0)
-      .eq("type", p.type?? '')
+      .eq("id_user", p.id_user ?? 0)
+      .eq("type", p.type ?? "")
       .order("id", { ascending: false });
     return data;
   } catch (error) {
@@ -61,7 +58,7 @@ export const movementDelete = async (p) => {
   }
 };
 
-export const movementUpdate = async(p) => {
+export const movementUpdate = async (p) => {
   try {
     const { error } = await supabase
       .from(TABLE_NAME)
@@ -74,18 +71,17 @@ export const movementUpdate = async(p) => {
   } catch (error) {
     alert(error.error_description || error.message + " editar categorias");
   }
-}
+};
 
 export const movementDeleteAll = async (p) => {
   try {
     const { error } = await supabase
       .from(TABLE_NAME)
       .delete()
-      .eq("id_user", p.id_user)
+      .eq("id_user", p.id_user);
     if (error) {
       alert("Error al eliminar", error);
-    }
-    else {
+    } else {
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -99,19 +95,34 @@ export const movementDeleteAll = async (p) => {
   }
 };
 
-export const movementGetByMonthYear = async(p) => {
+export const movementGetByMonthYear = async (p) => {
   try {
-    const {data, error} = await supabase.rpc("getmovementsbymonthyear", {
-      month:Number(p.month),
-      year:Number(p.year),
-      id_user:Number(p.id_user),
-      type_category:String(p.type)
-    })
-    if ( error) console.log('error rpc', error)
-    console.log('data', data)
-    return data
+    const { data, error } = await supabase.rpc("getmovementsbymonthyear", {
+      month: Number(p.month),
+      year: Number(p.year),
+      id_user: Number(p.id_user),
+      type_category: String(p.type_category),
+    });
+    if (error) console.log("error rpc", error);
+    console.log("rpc data", data, p);
+    return data;
+  } catch (error) {
+    console.log(error, "movementGetByMonthYear");
   }
-  catch (error) {
-    console.log(error, "movementGetByMonthYear")
+};
+
+export const movementRptByMonthYear = async (p) => {
+  try {
+    const { data, error } = await supabase.rpc("rpt_movements_by_year_month", {
+      month: Number(p.month),
+      year: Number(p.year),
+      id_user: Number(p.id_user),
+      type_category: String(p.type_category),
+    });
+    if (error) console.log("error rpc", error);
+    console.log("rpc data", data, p);
+    return data;
+  } catch (error) {
+    console.log(error, "movementGetByMonthYear");
   }
-}
+};

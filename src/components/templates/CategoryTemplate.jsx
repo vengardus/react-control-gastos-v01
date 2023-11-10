@@ -10,7 +10,9 @@ import { Btnfilter } from "../organismos/BtnFilter"
 import { v } from "../../styles/variables"
 import { TablaCategorias } from "../organismos/tablas/TablaCategorias"
 import { RegistrarCategorias } from "../organismos/formularios/RegistrarCategorias"
-
+//import { LottieAnimation } from "../moleculas/LottieAnimation"
+//import vacioverde from "../../assets/vacioverde.json"
+//import vaciorojo from "../../assets/vaciorojo.json"
 
 export const CategoryTemplate = ({ data }) => {
     const [state, setState] = useState(false)
@@ -101,8 +103,17 @@ export const CategoryTemplate = ({ data }) => {
 
             </section>
             <section className="main">
-                <TablaCategorias 
-                    data={data} 
+                {/* {
+                    data.length > 0
+                    && <LottieAnimation
+                        height={"300px"}
+                        width={"300px"}
+                        animation={type == APP_CONFIG.movementType.ingreso ? vacioverde : vaciorojo}
+                    />
+                } */}
+
+                <TablaCategorias
+                    data={data}
                     setdataSelect={setDataSelect}
                     setAccion={setAction}
                     SetopenRegistro={setOpenRegistro}

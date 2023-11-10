@@ -5,6 +5,7 @@ import { APP_CONFIG } from "../utils/dataEstatica";
 
 export const useOperations = create((set, get) => ({
     titleBtnDropDown: "Categoría ingresos",
+    titleBtnDropDownMovements: "Ingresos",
     colorCategory: v.colorIngresos,
     bgCategory: v.colorbgingresos,
     type: APP_CONFIG.movementType.ingreso,
@@ -20,10 +21,10 @@ export const useOperations = create((set, get) => ({
         set({
             type: p.tipo,
             titleBtnDropDown: p.text,
+            titleBtnDropDownMovements: p.text,
             colorCategory: p.color,
             bgCategory: p.bgColor,
         })
         const { type } = get()
-        console.log('settype', type)
     }
 }))

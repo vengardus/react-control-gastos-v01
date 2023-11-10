@@ -65,6 +65,9 @@ pnpm add react-color
 pnpm add emoji-picker-react
 pnpm add react-spinners
 pnpm add dayjs
+pnpm add @mui/material @emotion/react @emotion/styled
+pnpm add chart.js react-chartjs-2
+pnpm add swiper
 ```
 
 ## Desarrollo
@@ -108,14 +111,43 @@ execute function insert_account();
 
 ```sql
 create function getmovementsbymonthyear(year int, month int, id_user int, type_category varchar)
-returns table()
+returns table(
+  id int,
+  description varchar,
+  value numeric,
+  date date,
+  state varchar,
+  desc_account varchar,
+  desc_category varchar,
+  currency_value varchar
+)
 language sql
 as $$
-select movements.id, movements.description, movements.value, movements.date, accounts.description as "cuenta", categories.description as "categoria" from movements
+select movements.id, movements.description, movements.value, movements.date, movements.state, accounts.description as "desc_account", categories.description as "desc_category", (users.currency || ' ' || movements.value) as currency_value from movements
   inner join accounts on accounts.id = movements.id_account
   inner join users on users.id = accounts.id_user
   inner join categories on categories.id = movements.id_category
   where categories.type = type_category and date_part('year', movements.date)=year and date_part('month', movements.date)=month
+$$;
+```
+
+```sql
+create or replace function rpt_movements_by_year_month(year int, month int, id_user int, type_category varchar)
+returns table (
+  total numeric,
+  description varchar,
+  icon varchar,
+  color varchar
+)
+language sql
+as $$
+select sum(movements.value) as total, categories.description, categories.icon, categories.color 
+from movements
+  inner join accounts on accounts.id = movements.id_account
+  inner join users on users.id = accounts.id_user
+  inner join categories on categories.id = movements.id_category
+  where categories.type = type_category and date_part('year', movements.date)=year and date_part('month', movements.date)=month
+  group by categories.description, categories.icon, categories.color;
 $$;
 ```
 

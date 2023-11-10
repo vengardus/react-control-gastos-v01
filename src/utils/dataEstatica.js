@@ -52,6 +52,21 @@ export const DataDesplegableTipo = [
   },
 ];
 
+export const DataDesplegableMovimientos = [
+  {
+    text: "Gastos",
+    color: v.colorGastos,
+    tipo: APP_CONFIG.movementType.gasto,
+    bgColor: v.colorbgGastos
+  },
+  {
+    text: "Ingresos",
+    color: v.colorIngresos,
+    tipo: APP_CONFIG.movementType.ingreso,
+    bgColor: v.colorbgingresos
+  },
+];
+
 //data SIDEBAR
 export const LinksArray = [
   {
@@ -72,7 +87,7 @@ export const LinksArray = [
   {
     label: "Informes",
     icon: MdOutlineAnalytics,
-    to: "/informes",
+    to: "/report",
   },
   {
     label: "Dashboard",
@@ -95,13 +110,13 @@ export const SecondarylinksArray = [
 //temas
 export const TemasData = [
   {
-    icono: "🌞",
-    descripcion: "light",
+    icon: "🌞",
+    description: "light",
    
   },
   {
-    icono: "🌚",
-    descripcion: "dark",
+    icon: "🌚",
+    description: "dark",
     
   },
 ];

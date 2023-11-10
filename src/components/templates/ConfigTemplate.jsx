@@ -23,15 +23,15 @@ export const ConfigTemplate = () => {
     const country = select.countryName ?? dataUser.country
     const selectedCountry = `${currency} ${country}`
     // tema
-    console.log('selectTheme', selectTheme, selectTheme.descripcion)
+    console.log('selectTheme', selectTheme, selectTheme.description)
     const iconThemeDb = (dataUser.theme === "0") ? "💡" : "🌙"
     const themeDb = (dataUser.theme === "0") ? "light" : "dark"
-    const initTheme = selectTheme.descripcion ?? themeDb
-    const initIconTheme = selectTheme.icono ?? iconThemeDb
+    const initTheme = selectTheme.description ?? themeDb
+    const initIconTheme = selectTheme.icon ?? iconThemeDb
     const selectedTheme = `${initIconTheme} ${initTheme}`
 
     const update = async () => {
-        const newTheme = (selectTheme.descripcion === "light") ? "0" : "1"
+        const newTheme = (selectTheme.description === "light") ? "0" : "1"
         const p = {
             theme: newTheme,
             currency: currency,
@@ -85,6 +85,8 @@ export const ConfigTemplate = () => {
                             data={TemasData}
                             setState={() => setStateThemes(!stateThemes)}
                             func={setSelectTheme}
+                            bottom={"88%"}
+                            scroll={"0%"}
                         />
                     }
                 </ContentCard>

@@ -10,12 +10,19 @@ import {
 
 export const useCategoryStore = create((set, get) => ({
     dataCategory: [],
+    categoriaItemSelect: [],
     categoryGet: async (p) => {
         const data = await categoryGet(p)
-        set({ dataCategory: data?? [] })
-        console.log('categoryGet', data)
+        set({ 
+            dataCategory: data?? [],
+            categoriaItemSelect: data[0]?? null
+        })
         return data?? []
     },
+
+    selectCategoria: (p) => {
+        set({ categoriaItemSelect: p });
+      },
 
     categoryInsert: async(p) => {
         await categoryInsert(p)

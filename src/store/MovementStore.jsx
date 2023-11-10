@@ -1,22 +1,34 @@
 import { create } from "zustand";
-import { movementGetByMonthYear } from "../supabase/movement.crud";
+import { 
+    movementDelete, 
+    movementDeleteAll, 
+    movementGetByMonthYear, 
+    movementRptByMonthYear, 
+    movementInsert 
+} from "../supabase/movement.crud";
 
 
 export const useMovementStore = create((set, get) => ({
     dataMovement: [],
+    dataRptMovimientosAñoMes:[],
     totalMonthYear: 0,
     totalMonthYearPagados: 0,
     totalMonthYearPendientes: 0,
-    getMovements: async(p) => {
+    parametros: {},
+
+    movementGet: async (p) => {
         const response = await movementGetByMonthYear(p)
-        movementGetByMonthYear(p)
-        const {calculateTotals} = get()
+        //movementGetByMonthYear(p)
+        console.log("movementget", response, p)
+        const calculateTotals = get().calculateTotals
         calculateTotals(response)
-        set({
-            dataMovement: response
-        })
+        set(()=> ({
+            dataMovement: response,
+            parametros: p
+        }))
         return response
     },
+
     calculateTotals: (response) => {
         const dtPagados = response.filter((item) => item.state === "1")
         const dtPendientes = response.filter((item) => item.state === "0")
@@ -44,5 +56,26 @@ export const useMovementStore = create((set, get) => ({
             totalMonthYearPendientes: tPendientes
         })
 
-    }
+    },
+
+    movementInsert: async (p) => {
+        await movementInsert(p);
+
+        const movementGet = get().movementGet;
+        const parametros = get().parametros;
+        movementGet(parametros)
+    },
+
+    movimentDelete: async (p) => {
+        await movementDeleteAll(p);
+        const { parametros } = get();
+        const { movementGet } = get();
+        set(movementGet(parametros));
+    },
+
+    rptMovimientosAñoMes: async (p) => {
+        const response = await movementRptByMonthYear(p);
+        set({ dataRptMovimientosAñoMes: response });
+        return response;
+    },
 }))

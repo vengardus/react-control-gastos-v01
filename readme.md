@@ -162,3 +162,15 @@ $$;
   "react/prop-types": "off"
 }
 ```
+
+### Imagenes generadas para el carrusel
+
+[https://www.canva.com/es_419/]
+
+### Documentacion chartjs react
+
+[https://react-chartjs-2.js.org/]
+
+### Ejemplos carrusel
+
+[http://swiperjs.com/demos]

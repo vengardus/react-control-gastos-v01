@@ -22,13 +22,7 @@ export function HomeTemplate() {
           <br /> MUCHAS GRACIAS POR APOYAR ESTE PROYECTO
         </SubText>
         <ContainerAutor>
-          <div className="contentImg">
-            <img src="https://i.ibb.co/6Nw0B9p/yjtityutyu.png" />
-          </div>
-          <div className="contentDescripcion">
-            <b>Ing. Franklin Bustamante</b>
-            <span>cualquiera puede programar</span>
-          </div>
+          
         </ContainerAutor>
         <ButtonContainer>
           <BtnSave url="https://t.me/htmlycss369"

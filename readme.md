@@ -174,3 +174,100 @@ $$;
 ### Ejemplos carrusel
 
 [http://swiperjs.com/demos]
+
+## Deploy en Firebase
+
+- Iniciar sesión en firebase [https://firebase.google.com]
+
+- Crear nuevo proyecto (paso 1-3): dar nombre al proyecto
+
+- Google analytics (Paso 2-3): deshabilitar analíticas
+
+- Creando proyecto .... (3-3)
+
+- Agregar app: seleccionar app web  < />
+
+- Registar app:
+  - ingresar sobrenombre app
+  - agregar sdk firebase:
+
+  ```pwd (carpeta de l proyecto)
+    pnpm add firebase 
+  ```
+
+  - Opción ir a Console (botón en Registar App)
+
+- Configurar Firebase hosting: menu compilación -> hosting
+  - Iniciar Firebae Cli
+
+  ```pwd
+    pnpm add -g firebase-tools
+  ```
+
+  - Siguiente
+
+  - Inicializar proyecto
+
+  ```pwd
+    firebase login
+  ```
+
+  - Generar proyecto
+  
+  ```pwd
+    pnpm run buid
+  ```
+  
+  - Solución al warning:
+
+    ```pwd
+      (!) Some chunks are larger than 500 KiB after minification. Consider:
+      - Using dynamic import() to code-split the application
+      - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/guide/en/#outputmanualchunks
+      - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+    ```
+  
+    ```vite.config.js
+      export default defineConfig({
+        plugins: [react()],
+        build: {
+          chunkSizeWarningLimit: 1600,    <==
+        },
+      })
+    ```
+  
+  - Inicialiar firebase
+
+    ```pwd
+      firebase init
+
+      Seleccionar opción: Hosting: Configure files for firebase hosting and (optionally) set up Github...
+      Use an existing project
+      Select project
+      What do you want to use as your public directory: enter
+      Configure as a simgle-page ? y
+      Set up automatic builds and deploys with Github? n
+    ```
+
+  - Deploy
+
+    ```pwd
+      firebase deploy
+    ```
+
+  - Modificar:
+
+    ```pwd
+      "hosting": {
+          "public": "dist",   <==
+
+    ```
+
+  - Configurar Url Autenticacion en Supabase
+
+    - Opción Authentication -> URL Configuration
+
+      - Redirects URLs -> Add URL
+        - Agregar la url del proyecto de firebase
+
+      - Modificar también en:  Site Url (asi funcionó para mi)

@@ -1,67 +1,57 @@
 //import './App.css'
 import { useState } from 'react'
-import { MyRoutes } from './routers/routes'
-import { createContext } from "react"
-import { Light, Dark } from './styles/themes'
+import { useLocation } from 'react-router-dom'
 import { ThemeProvider, styled } from 'styled-components'
+
+import { MyRoutes } from './routers/routes'
+import { Light, Dark } from './styles/themes'
 import { AuthContextProvider } from './context/AuthContext'
 import { SideBar } from './components/organismos/sidebar/SideBar'
-import { Device } from './styles/breakpoints'
 import { MenuBurger } from './components/organismos/MenuBurger'
-import { useLocation } from 'react-router-dom'
-import {
-  useQuery,
-} from '@tanstack/react-query'
+import { Device } from './styles/breakpoints'
 import { useUserStore } from './store/UserStore'
 import { LoginPage } from './pages/LoginPage'
 import { SpinnerLoader } from './components/moleculas/SpinnerLoader'
+import { APP_CONFIG } from './utils/dataEstatica'
+import { useUserQuery } from './querys/useUserQuery'
 
-
-export const ThemeContext = createContext(null)
 
 function App() {
-  const { userGet, dataUser } = useUserStore()
+  const dataUser = useUserStore((state) => state.dataUser)
   const { pathname } = useLocation()
-  //const [theme, setTheme] = useState(dataUser.theme)
-  const theme = (dataUser?.theme === "0") ? "light" : "dark"
-  const themeStyle = (theme === "light") ? Light : Dark
+  const theme = dataUser?.theme ?? APP_CONFIG.theme.dark
+  const themeStyle = (theme === APP_CONFIG.theme.light) ? Light : Dark
   const [sideBarOpen, setSideBarOpen] = useState(false)
+  const query = useUserQuery()
 
-  const query = useQuery({
-    queryKey: ["mostrar usuario"],
-    queryFn: () => userGet()
-  })
-
-  if (query.isLoading ) return <SpinnerLoader />
+  if (query.isLoading) return <SpinnerLoader />
   if (query.isError) return <h1>Error... </h1>
 
   return (
     <>
-      <ThemeContext.Provider value={{ theme }}>
-        <ThemeProvider theme={themeStyle} >
-          <AuthContextProvider>
-            {
-              (pathname === '/login')
-                ? <LoginPage />
-                :
-                <Container className={sideBarOpen ? "active" : ""}>
-                  <div className='ContentSideBar'>
-                    <SideBar
-                      state={sideBarOpen}
-                      setState={setSideBarOpen}
-                    />
-                  </div>
-                  <div className='ContentBurger'>
-                    <MenuBurger />
-                  </div>
-                  <ContainerBody>
-                    <MyRoutes />
-                  </ContainerBody>
-                </Container>
-            }
-          </AuthContextProvider>
-        </ThemeProvider>
-      </ThemeContext.Provider>
+      <ThemeProvider theme={themeStyle} >
+        <AuthContextProvider>
+          {
+            (pathname === '/login')
+              ? <LoginPage />
+              :
+              <Container className={sideBarOpen ? "active" : ""}>
+                <div className='ContentSideBar'>
+                  <SideBar
+                    state={sideBarOpen}
+                    setState={setSideBarOpen}
+                  />
+                </div>
+                <div className='ContentBurger'>
+                  <MenuBurger />
+                </div>
+                <ContainerBody>
+                  <MyRoutes />
+                </ContainerBody>
+              </Container>
+          }
+        </AuthContextProvider>
+      </ThemeProvider>
     </>
   )
 }
@@ -101,6 +91,5 @@ const ContainerBody = styled.div`
     grid-column: 2;
   }
 `
-
 
 export default App

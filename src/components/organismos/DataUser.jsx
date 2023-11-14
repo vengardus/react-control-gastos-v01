@@ -12,7 +12,6 @@ export const DataUser = ({ stateConfig }) => {
     const { signOut } = useAuthStore();
 
     const funcionXtipo = async (tipo) => {
-        console.log('DataUser.tipo', tipo)
         if (tipo.tipo === "cerrarsesion") {
             await signOut();
         }

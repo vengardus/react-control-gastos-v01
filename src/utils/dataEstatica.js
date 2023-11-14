@@ -16,6 +16,10 @@ export const APP_CONFIG = {
   actionCrud: {
     update: "update",
     insert: "insert"
+  },
+  theme: {
+    light: "0",
+    dark: "1"
   }
 }
 

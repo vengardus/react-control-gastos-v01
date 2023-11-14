@@ -4,8 +4,11 @@ import { v } from "../../../styles/variables"
 import { LinksArray, SecondarylinksArray } from "../../../utils/dataEstatica"
 import { NavLink } from "react-router-dom"
 import { SideBarCard } from "./SideBarCard"
+import { UserAuth } from "../../../context/AuthContext"
 
 export const SideBar = ({ state, setState }) => {
+    const { user } = UserAuth()
+
     return (
         <Main $isOpen={state}>
             <span className="SiderBarButton" onClick={() => setState(!state)}>
@@ -18,6 +21,17 @@ export const SideBar = ({ state, setState }) => {
                     </div>
                     <h2>Cerdys</h2>
                 </div>
+
+                <div className="Welcome">
+                    <span>Bienvenido!</span>
+                    <div className="InfoUser">
+                        <div className="ContainerImg">
+                            <img src={user.picture} />
+                        </div>
+                        <span>{String(user.name).slice(0,12)}</span>
+                    </div>
+                </div>
+
                 {
                     LinksArray.map(({ icon, label, to }) => {
                         const Icon = icon
@@ -132,6 +146,32 @@ const Container = styled.div`
             }
             100% {
                 transform: translate(0, -0px);
+            }
+        }
+    }
+    .Welcome {
+        display: ${({ $isOpen }) => ($isOpen ? `block` : `none`)};
+        padding: 0 5%;
+        margin-bottom:10px;
+        .InfoUser  {
+            display: flex;
+            align-items: center;
+            padding-top: 3px;
+            .ContainerImg {
+                height: 40px;
+                width: 40px;
+                min-height: 40px;
+                min-width: 40px;
+                border-radius: 50%;
+                overflow: hidden;
+                margin-right: 22px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    width: 100%;
+                    object-fit: cover;
+                }
             }
         }
     }

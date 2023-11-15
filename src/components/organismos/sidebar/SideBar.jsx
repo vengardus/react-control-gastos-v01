@@ -26,9 +26,9 @@ export const SideBar = ({ state, setState }) => {
                     <span>Bienvenido!</span>
                     <div className="InfoUser">
                         <div className="ContainerImg">
-                            <img src={user.picture} />
+                            <img src={user?.picture} />
                         </div>
-                        <span>{String(user.name).slice(0,12)}</span>
+                        <span>{String(user?.name)?.slice(0,12)}</span>
                     </div>
                 </div>
 

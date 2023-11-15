@@ -271,3 +271,11 @@ $$;
         - Agregar la url del proyecto de firebase
 
       - Modificar también en:  Site Url (asi funcionó para mi)
+
+  - Posteriores deploys:
+
+    ```pwd
+      firebase login    # solo si es necesario
+      pnpm run buid
+      firebase deploy
+    ```
